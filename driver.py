@@ -5,7 +5,7 @@ from pyspark.sql import SparkSession
 
 def main():
     spark = SparkSession.builder \
-        .appName("LoadCSV") \
+        .appName("WeatherReader") \
         .getOrCreate()
 
     df_raw_one = spark.read.csv("input_files/data_one_header.csv", header=True, inferSchema=True)
