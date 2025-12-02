@@ -1,0 +1,17 @@
+.idea/
+.pytest_cache/
+__pycache__/
+venv/
+data/
+.ipynb_checkpoints/
+*.zip
+*.tar.gz
+*.o
+*.iml
+*.class
+*grader.py
+out/
+.gradle/
+build/
+gradle/
+bin/
