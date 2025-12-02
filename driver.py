@@ -2,6 +2,7 @@ import pyspark
 
 from pyspark.sql import SparkSession
 
+
 def main():
     spark = SparkSession.builder \
         .appName("LoadCSV") \
@@ -20,6 +21,7 @@ def main():
     dftwo = df_raw_two.filter(~(df_raw_two[df_raw_two.columns[0]] == firsttwo[df_raw_two.columns[0]]))
     dftwo.show()
     dftwo.printSchema()
+
 
 if __name__ == '__main__':
     main()
