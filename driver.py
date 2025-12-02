@@ -22,6 +22,8 @@ def main():
     dftwo.show()
     dftwo.printSchema()
 
+    df_full = dfone.join(dftwo, ["Station", "Date"], "inner")
+    df_full.show()
 
 if __name__ == '__main__':
     main()
