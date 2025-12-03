@@ -7,6 +7,7 @@ from pyspark.ml.feature import VectorAssembler
 from pyspark.ml.classification import RandomForestClassifier
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 
+
 def main():
     spark = SparkSession.builder \
         .appName("WeatherReader") \
@@ -59,7 +60,7 @@ def main():
     )
     df_fixed.show()
 
-    feature_cols = ["Avg Temp","RH Max", "Vapor Pressure", "Gust Speed","Gust Dir","Solar Rad"]
+    feature_cols = ["Avg Temp", "RH Max", "Vapor Pressure", "Gust Speed", "Gust Dir", "Solar Rad"]
     assembler = VectorAssembler(inputCols=feature_cols, outputCol="features")
     df_ml = assembler.transform(df_fixed)
 
@@ -80,6 +81,7 @@ def main():
 
     accuracy = evaluator.evaluate(predictions)
     print(f"Accuracy = {accuracy}")
+
 
 if __name__ == '__main__':
     main()
