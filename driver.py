@@ -1,7 +1,7 @@
 import pyspark
 
 from pyspark.sql import SparkSession
-
+from pyspark.sql.functions import col
 
 def main():
     spark = SparkSession.builder \
@@ -24,6 +24,18 @@ def main():
 
     df_full = dfone.join(dftwo, ["Station", "Date"], "inner")
     df_full.show()
+
+    #datacolumns = ["RH Max","Vapor Pressure","Liquid Precip","Gust Speed", "Gust Dir", "Solar Rad"]
+    #condition = " & ".join([f"(col('{c}') != -999)" for c in datacolumns])
+    df_fixed = df_full.filter(
+        (col("RH Max").cast("double") != -999) & 
+        (col("Vapor Pressure").cast("double") != -999) &
+        (col("Liquid Precip").cast("double") != -999) & 
+        (col("Gust Speed").cast("double") != -999) & 
+        (col("Gust Dir").cast("double") != -999) & 
+        (col("Solar Rad").cast("double") != -999) 
+    )
+    df_fixed.show()
 
 if __name__ == '__main__':
     main()
