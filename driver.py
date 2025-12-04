@@ -6,6 +6,7 @@ from pyspark.sql import functions
 from pyspark.ml.feature import VectorAssembler
 from pyspark.ml.classification import RandomForestClassifier
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
+from pyspark.ml.evaluation import BinaryClassificationEvaluator
 
 
 def main():
@@ -92,8 +93,15 @@ def main():
         labelCol="High_Precip", predictionCol="prediction", metricName="accuracy"
     )
 
+    evaluator2 = BinaryClassificationEvaluator(
+        labelCol="High_Precip",
+        rawPredictionCol="rawPrediction",
+        metricName="areaUnderPR"     # preferred for rare events
+    )   
     accuracy = evaluator.evaluate(predictions)
     print(f"Accuracy = {accuracy}")
+    aupr = evaluator2.evaluate(predictions)
+    print("Area Under PR Curve =", aupr)
 
 
 if __name__ == "__main__":
